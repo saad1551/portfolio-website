@@ -1,65 +1,163 @@
-import Image from "next/image";
+import Link from "next/link";
+
+const projects = [
+  {
+    name: "FairGig",
+    description:
+      "Microservices-based gig worker rights platform (SOFTEC 2026) with 7 backend services in FastAPI + Express, a React frontend, LLM-powered shift logging, vision-based verification, and statistical anomaly detection.",
+    stack: ["FastAPI", "Express", "React", "LLMs"],
+    href: "https://fairgig.online",
+    linkLabel: "Live",
+  },
+  {
+    name: "Search Engine",
+    description:
+      "Large-scale search engine indexing 110k+ articles. Experimented with algorithms from the literature and implemented the barrelling techniques described in The Anatomy of a Large-Scale Hypertextual Web Search Engine (Brin & Page, 1998).",
+    stack: ["Python", "Information Retrieval"],
+    href: "https://github.com/saad1551/SearchEngine",
+    linkLabel: "GitHub",
+  },
+  {
+    name: "V-Therapist",
+    description:
+      "Virtual psychologist built on small language models with memory enhancement. Surveyed candidate approaches and landed on vector databases, which gave the best retrieval performance for prior-session context.",
+    stack: ["Python", "LLMs", "Vector DB"],
+    href: "https://github.com/saad1551/psychologist-language-model",
+    linkLabel: "GitHub",
+  },
+  {
+    name: "Rate Limiter",
+    description:
+      "Token-bucket HTTP rate limiter in Go, exposed as chi middleware with per-IP buckets, mutex-guarded lazy refill, and a janitor goroutine evicting idle entries. Verified race-free under concurrent tests.",
+    stack: ["Go", "chi"],
+    href: "https://github.com/saad1551/rate-limiter",
+    linkLabel: "GitHub",
+  },
+  {
+    name: "Workout Tracking API",
+    description:
+      "Go backend for tracking workouts and exercise entries with chi + PostgreSQL. Token auth, user-scoped CRUD, middleware-driven authorization, and database migrations, all wired up in a containerized Docker Compose setup.",
+    stack: ["Go", "PostgreSQL", "Docker"],
+    href: "https://github.com/saad1551/workouts",
+    linkLabel: "GitHub",
+  },
+];
+
+const socials = [
+  { label: "GitHub", href: "https://github.com/saad1551" },
+  { label: "LinkedIn", href: "https://linkedin.com/in/saadashraf380715222" },
+  { label: "Email", href: "mailto:saad.ashraf.9094@gmail.com" },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
+    <main className="mx-auto w-full max-w-2xl px-6 py-24 sm:py-32">
+      <section className="mb-20">
+        <p className="mb-3 font-mono text-sm text-muted">Software Engineer</p>
+        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+          Muhammad Saad Ashraf
+        </h1>
+        <p className="mt-6 text-lg leading-relaxed text-muted">
+          Software engineer based in Karachi. Recent Software Engineering
+          graduate from NUST. I like backends, distributed systems, and code
+          that&apos;s easy to delete.
+        </p>
+        <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+          {socials.map((s) => (
             <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              key={s.label}
+              href={s.href}
+              className="text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-foreground"
+              target={s.href.startsWith("http") ? "_blank" : undefined}
+              rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+              {s.label}
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section className="mb-20">
+        <h2 className="mb-6 font-mono text-sm uppercase tracking-wider text-muted">
+          About
+        </h2>
+        <div className="space-y-4 leading-relaxed">
+          <p>
+            Most recently I was at Bazaar Technologies, working across payments
+            and platform. I rebuilt the card payment flow (HBL + Cybersource)
+            to drive payment failures and chargebacks to near zero, made card
+            refunds instant via a wallet-first approach that 47% of customers
+            stuck with, and integrated FBR digital invoicing so thousands of
+            invoices report automatically each day.
+          </p>
+          <p>
+            Outside of that I write a lot of Go, build small but
+            well-instrumented services, and keep a steady stream of side
+            projects going — search engines, rate limiters, LLM experiments.
+            I&apos;m happiest when the problem is a little harder than I
+            thought it would be.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
+      </section>
+
+      <section className="mb-20">
+        <h2 className="mb-6 font-mono text-sm uppercase tracking-wider text-muted">
+          Projects
+        </h2>
+        <ul className="space-y-8">
+          {projects.map((p) => (
+            <li key={p.name}>
+              <Link
+                href={p.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block"
+              >
+                <div className="flex items-baseline justify-between gap-4">
+                  <h3 className="font-medium group-hover:underline underline-offset-4">
+                    {p.name}
+                  </h3>
+                  <span className="font-mono text-xs text-muted">
+                    {p.linkLabel}{" "}
+                    <span
+                      aria-hidden
+                      className="inline-block transition-transform group-hover:translate-x-0.5"
+                    >
+                      →
+                    </span>
+                  </span>
+                </div>
+                <p className="mt-2 text-muted leading-relaxed">
+                  {p.description}
+                </p>
+                <p className="mt-3 font-mono text-xs text-muted">
+                  {p.stack.join(" · ")}
+                </p>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section>
+        <h2 className="mb-6 font-mono text-sm uppercase tracking-wider text-muted">
+          Contact
+        </h2>
+        <p className="leading-relaxed">
+          Best way to reach me is by email at{" "}
           <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="mailto:saad.ashraf.9094@gmail.com"
+            className="underline decoration-border underline-offset-4 transition-colors hover:decoration-foreground"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
+            saad.ashraf.9094@gmail.com
           </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+          . I&apos;m based in Karachi.
+        </p>
+      </section>
+
+      <footer className="mt-24 border-t border-border pt-6 font-mono text-xs text-muted">
+        © {new Date().getFullYear()} Muhammad Saad Ashraf
+      </footer>
+    </main>
   );
 }
