@@ -48,7 +48,7 @@ const socials = [
   { label: "LinkedIn", href: "https://linkedin.com/in/saadashraf380715222" },
   {
     label: "Resume",
-    href: "https://github.com/saadashraf80/CV/releases/latest/download/Resume-Muhammad-Saad-Ashraf.pdf",
+    href: "https://github.com/saad1551/CV/releases/latest/download/Resume-Muhammad-Saad-Ashraf.pdf",
   },
   { label: "Email", href: "mailto:saad.ashraf.9094@gmail.com" },
 ];
